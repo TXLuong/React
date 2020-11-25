@@ -1,0 +1,44 @@
+Giải quyết vấn đề conflict bằng commmand line linux :
+Merge conflict xảy ra khi 2 người cùng chỉnh sửa 1 dòng của file hoặc 1 người sửa 1 người xóa file.
+
+
+😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 😀️ 
+
+
+1. Mở terminal 
+2. cd đến repo 
+3. git status để xem file nào bị conflict 
+4. Dùng text editor để mở các file conflict 
+5. 	<<<<<< đây là đánh dấu chỗ conflict 
+	======= ngăn cách code của bạn và code của người ở nhánh khác 
+	>>>>>>>> branch-name đánh dấu kết thúc phần thay đổi ở nhánh branch-name  
+6. Xóa các marker 
+7. git add .
+8. git commit -m "Resolved merge conflict by incorporate both suggestions"
+
+
+Thoát khỏi trạng thái detached trong git : 
+Nguyên nhân: do checkout đến một conmmit của một nhánh dẫn đến tình trạng git không nhận diện được đang code và sửa trên nhánh nào.
+Khắc phục : tạo một nhánh tạm, checkout nhánh tạm đó cùng với mã hash của commit vừa checkout ( xong là bị detached ) , sau khi checkout thì switch sang nhánh khác sau đó xóa nhánh tạm :
+Các lệnh : 
+git checkout -b test-branch 56a4e5c08
+git checkout master
+git branch -d test-branch
+
+Cách đổi tên commit :
+git rebase -i HEAD~n ( với n là số commit gần nhất muốn thay đổi, commit gần nhất hiện tại nằm ở cuối file khi chạy lệnh này ) 
+Đổi pick -> reoword, sau đó save 
+Đổi message trong commit sau đó save lại 
+git push --force để public thay đổi 
+
+Đang đứng từ nhánh A cần dùng tính năng của nhánh B :
+1.checkout vê nhánh A
+2.git cherry-pick hash-sha(commit cần lấy của nhánh B) 
+
+Đang đứng từ A mà muốn các tính năng của A đặt lên đầu của nhánh B thì :
+1.Checkout nhánh A
+2.Git rebase B 
+
+
+
+
